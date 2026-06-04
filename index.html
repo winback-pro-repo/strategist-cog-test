@@ -1,0 +1,266 @@
+# Lovable Prompt — Strategist Cognitive Assessment
+## Copy and paste everything below this line into Lovable
+
+---
+
+Build a cognitive assessment web app for a job candidate applying for a **Strategist** role. The app should be clean, professional, and distraction-free. Here are the full requirements:
+
+---
+
+## App Overview
+
+**Title:** Winback — Strategist Skills Assessment  
+**Estimated time:** 10–15 minutes  
+**Number of questions:** 10  
+**Question format:** Multiple choice (one correct answer per question)  
+**Timer:** A visible countdown timer starting at 15:00 minutes. When time runs out, auto-submit whatever answers have been completed.  
+**Progress:** Show a progress bar and "Question X of 10" indicator throughout.
+
+---
+
+## Flow
+
+1. **Landing screen**
+   - Title: "Strategist Skills Assessment"
+   - Subtitle: "This assessment takes approximately 10–15 minutes. Read each question carefully and choose the best answer. You may not go back to previous questions."
+   - Input field: Candidate's full name (required)
+   - Input field: Candidate's email address (required)
+   - Button: "Start Assessment"
+   - Do not show any questions until the candidate clicks Start.
+
+2. **Assessment screen**
+   - Display one question at a time.
+   - No back button — candidates move forward only.
+   - Each question has 4 answer choices labeled A, B, C, D.
+   - Once an answer is selected and the candidate clicks "Next", the answer is locked.
+   - Timer counts down in the top-right corner.
+
+3. **Submission screen**
+   - After question 10 (or when timer expires), show: "Thank you for completing the assessment. We'll be in touch soon."
+   - No score shown to the candidate.
+
+4. **Admin result delivery**
+   - On submission, send an email to **camila@winback.pro** with:
+     - Candidate name and email
+     - Each question number with the answer selected and whether it was correct (✅ or ❌)
+     - Total score (e.g., "7 / 10")
+     - Category breakdown: Logical Reasoning X/3, Verbal Reasoning X/3, Numerical Reasoning X/2, Attention to Detail X/2
+     - Time taken
+   - Use Resend or Supabase for email delivery.
+
+---
+
+## Questions
+
+### Question 1 — Logical Reasoning
+**Category tag (internal only):** logical_reasoning
+
+A DTC brand has the following data for their Welcome Series:
+
+- Email 1 (immediate): 58% open rate, 12% click rate
+- Email 2 (Day 2): 31% open rate, 6% click rate
+- Email 3 (Day 5): 22% open rate, 4% click rate
+
+The team is debating whether to add a 4th email on Day 10 or remove Email 3 entirely. What is the most strategically sound recommendation?
+
+- A) Remove Email 3 — its performance is too low to justify the send.
+- B) Add a 4th email on Day 10, since the series shows consistent engagement.
+- C) Keep Email 3 and test a new subject line before making any structural changes.
+- D) Shorten the series to 1 email only, since Email 1 outperforms the others significantly.
+
+**Correct answer: C**
+*(Email 3 still has a 22% open rate — meaningful engagement. The strategic move is to test before cutting, not make structural decisions on raw numbers alone. Adding a 4th email without fixing Email 3's performance first is premature.)*
+
+---
+
+### Question 2 — Numerical Reasoning
+**Category tag (internal only):** numerical_reasoning
+
+A client has 45,000 subscribers on their winback segment (lapsed 90–180 days). Their average order value is $85. Industry benchmark conversion rate for winback campaigns is 2%.
+
+If they run a winback campaign at benchmark, what is the estimated revenue opportunity?
+
+- A) $38,250
+- B) $76,500
+- C) $3,825
+- D) $765,000
+
+**Correct answer: B**
+*(45,000 × 2% = 900 conversions × $85 AOV = $76,500)*
+
+---
+
+### Question 3 — Verbal Reasoning
+**Category tag (internal only):** verbal_reasoning
+
+A client sends this feedback after reviewing a draft strategy deck:
+
+*"This is good but it feels more like a summary of what we already know. We want to understand what we should do differently and why it will work."*
+
+Which response best reflects strategic thinking?
+
+- A) Revise the deck to add a new section with specific, prioritized recommendations tied to projected revenue impact.
+- B) Add a slide that lists the client's current flows and highlights which ones are performing above benchmark.
+- C) Schedule a follow-up call to gather more information before making any changes to the deck.
+- D) Add a competitor analysis section to give the client more context around industry trends.
+
+**Correct answer: A**
+*(The client explicitly asked for "what we should do differently" and "why it will work" — that maps directly to prioritized, outcome-tied recommendations. B is more of the same (summary), C delays resolution, D is irrelevant to their feedback.)*
+
+---
+
+### Question 4 — Attention to Detail
+**Category tag (internal only):** attention_to_detail
+
+Review this strategy summary for a post-purchase flow:
+
+*"The goal of this flow is to increase repeat purchase rate by 15% over 90 days. We will send 4 emails: a thank-you on Day 0, a product education email on Day 3, a cross-sell offer on Day 7, and a review request on Day 14. This will be triggered for all customers who place their first order. The flow will suppress anyone who makes a second purchase and re-enter customers who have purchased twice."*
+
+What is the logical error in this summary?
+
+- A) A 15% increase in 90 days is an unrealistic goal.
+- B) Customers who have purchased twice should not re-enter a first-purchase flow.
+- C) The review request should come before the cross-sell offer.
+- D) Product education emails are ineffective in post-purchase flows.
+
+**Correct answer: B**
+*(The summary says the flow is for customers placing their "first order," but then states it re-enters customers who have "purchased twice" — this is a direct contradiction and a logical error in the flow design.)*
+
+---
+
+### Question 5 — Logical Reasoning
+**Category tag (internal only):** logical_reasoning
+
+A brand's cart abandonment flow has a 3.8% conversion rate. The industry benchmark for their vertical is 5.2%. The flow currently has 2 emails: one at 1 hour and one at 24 hours.
+
+A strategist proposes adding a 3rd email (SMS) at 48 hours with a 10% discount. A second strategist argues the issue is the existing copy, not the send cadence.
+
+Which approach is most strategically defensible before making any changes?
+
+- A) Add the SMS immediately — SMS consistently outperforms email in cart recovery.
+- B) A/B test the existing Email 2 copy before adding a new touchpoint, to isolate the variable.
+- C) Remove Email 1 and replace it with SMS for maximum immediacy.
+- D) Add the 3rd touchpoint and test everything simultaneously to save time.
+
+**Correct answer: B**
+*(Testing existing copy first isolates the variable properly. Adding a new channel while copy may be the root problem conflates two different fixes and makes it impossible to learn what drove any improvement.)*
+
+---
+
+### Question 6 — Verbal Reasoning
+**Category tag (internal only):** verbal_reasoning
+
+A new client asks: "We already send a lot of emails — how do we know we're not over-mailing our list?"
+
+Which response best demonstrates strategic expertise?
+
+- A) "We'll look at unsubscribe rate and spam complaints — if those are rising, you're over-mailing."
+- B) "We'll analyze send frequency alongside open rate trends, unsubscribe rate, and revenue per recipient to identify the point where more sends yield diminishing returns — then calibrate from there."
+- C) "Most brands send 3–4 emails per week. We'll benchmark your frequency against that and adjust accordingly."
+- D) "We'll survey your subscribers to find out how often they want to hear from you."
+
+**Correct answer: B**
+*(B is the only answer that demonstrates a multi-metric, data-driven framework for diagnosing over-mailing and arriving at an optimal frequency — not a single signal, not a blanket benchmark, not anecdotal.)*
+
+---
+
+### Question 7 — Numerical Reasoning
+**Category tag (internal only):** numerical_reasoning
+
+A client's welcome flow has these results over 30 days:
+
+- 4,200 new subscribers entered the flow
+- 336 placed their first order within 7 days of signup
+- Average order value: $72
+
+What is the welcome flow's revenue per recipient (RPR)?
+
+- A) $5.76
+- B) $24,192
+- C) $8.00
+- D) $72.00
+
+**Correct answer: A**
+*(Total revenue = 336 × $72 = $24,192. RPR = $24,192 ÷ 4,200 = $5.76)*
+
+---
+
+### Question 8 — Attention to Detail
+**Category tag (internal only):** attention_to_detail
+
+A strategist presents this recommendation in a client report:
+
+*"We recommend prioritizing the Browse Abandonment flow first because it has the highest revenue potential. Based on our analysis, 18% of site visitors abandon after viewing a product, and at a 4% conversion rate with an $80 AOV, the estimated monthly opportunity is $512,000."*
+
+The client's site gets 160,000 monthly visitors. Is the math correct?
+
+- A) Yes — the math is correct.
+- B) No — the number of abandoners was calculated incorrectly.
+- C) No — the estimated opportunity figure is too high.
+- D) No — the estimated opportunity figure is too low.
+
+**Correct answer: C**
+*(Correct math: 160,000 × 18% = 28,800 abandoners → 28,800 × 4% = 1,152 conversions → 1,152 × $80 = $92,160. The strategist appears to have skipped the abandonment rate and applied 4% directly to 160,000 (160,000 × 4% × $80 = $512,000), overstating the opportunity by ~5.5x.)*
+
+---
+
+### Question 9 — Verbal Reasoning
+**Category tag (internal only):** verbal_reasoning
+
+A strategist needs to explain to a non-technical client why their Klaviyo flows are underperforming. Which explanation is most effective?
+
+- A) "Your flows have suboptimal conditional splits and your suppression logic is creating gaps in your trigger architecture."
+- B) "The automated emails that go out after customer actions — like buying or abandoning a cart — aren't converting as well as they should. Here's what we think is causing it and what we'll change."
+- C) "Your email deliverability metrics indicate inbox placement issues that may be suppressing engagement rates across your flow ecosystem."
+- D) "We've audited your flows and found several areas for improvement that we'd like to discuss on our next call."
+
+**Correct answer: B**
+*(B translates technical concepts into plain language the client understands, directly addresses what's wrong, and signals what comes next — without jargon (A, C) or vague deflection (D).)*
+
+---
+
+### Question 10 — Logical Reasoning
+**Category tag (internal only):** logical_reasoning
+
+A strategist is auditing a brand's email program and finds the following:
+
+- Welcome flow: 54% open rate, 2.1% conversion rate ✅
+- Cart abandonment flow: 48% open rate, 1.2% conversion rate ⚠️
+- Browse abandonment flow: Not built yet
+- Post-purchase flow: 41% open rate, exists but has no cross-sell emails
+- Winback flow: 19% open rate, 0.3% conversion rate ⚠️
+
+Given limited time to deliver impact in the next 30 days, which prioritization is most defensible?
+
+- A) Build the Browse Abandonment flow first — it's missing entirely and likely has the highest upside.
+- B) Fix the Cart Abandonment flow first — it has traffic, decent open rates, but low conversion, suggesting a copy or offer problem with a clear fix.
+- C) Fix the Winback flow first — low conversion is a critical gap.
+- D) Add cross-sell emails to the Post-Purchase flow — existing buyers are the easiest to convert again.
+
+**Correct answer: B**
+*(Cart abandonment has an existing audience, strong open rates (proving deliverability and relevance), but weak conversion — this signals a fixable copy or offer problem with quick, measurable upside. Browse abandonment has no baseline data yet. Winback's low open rate suggests a list quality issue, not a quick fix. Post-purchase cross-sell has merit but lower urgency than a broken high-traffic flow.)*
+
+---
+
+## Scoring Logic
+
+| Score | Label |
+|-------|-------|
+| 9–10 | Exceptional |
+| 7–8  | Strong |
+| 5–6  | Developing |
+| 0–4  | Below threshold |
+
+Include this label in the admin email alongside the raw score.
+
+---
+
+## Design Requirements
+
+- Clean, minimal UI — white background, dark text
+- Brand color for buttons and progress bar: **#0F172A** (dark navy)
+- Accent: **#6366F1** (indigo) for selected answer state
+- Font: Inter (Google Fonts)
+- Mobile responsive
+- No external links, no ability to "inspect" or look up answers
+- Disable right-click and text selection on question/answer text
