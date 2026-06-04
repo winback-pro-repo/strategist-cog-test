@@ -1,1 +1,982 @@
-file:///Users/winback/Documents/Claude/Projects/Hiring/strategist_cognitive_test.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Winback Cognitive Assessment — Strategist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --surface: #F1F5F9;
+    --border: #E2E8F0;
+    --border-strong: #CBD5E1;
+    --text: #0F172A;
+    --text-muted: #64748B;
+    --text-faint: #94A3B8;
+    --brand: #0F172A;
+    --accent: #14B8A6;
+    --accent-hover: #0D9488;
+    --accent-soft: #ECFDF5;
+    --accent-border: #99F6E4;
+    --error: #DC2626;
+  }
+ 
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+ 
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+ 
+  .screen { display: none; }
+  .screen.active { display: block; }
+ 
+  /* ============ HEADER (above card) ============ */
+  .app-header { text-align: center; margin-bottom: 32px; }
+  .app-logo {
+    width: 56px;
+    height: 56px;
+    background: var(--brand);
+    border-radius: 14px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  .app-logo svg { width: 26px; height: 26px; }
+  .app-title {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin: 0 0 6px;
+  }
+  .app-role {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin: 0;
+  }
+ 
+  /* ============ CARD ============ */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .card-section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: var(--text);
+  }
+  .card-section-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+  }
+ 
+  /* ============ DESCRIPTION + STATS ============ */
+  .description {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin: 0 0 22px;
+  }
+ 
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .stat-box {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .stat-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+ 
+  .info-list {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  .info-list li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 6px;
+  }
+  .info-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+ 
+  /* ============ FORM ============ */
+  .field { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 7px;
+  }
+  input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--card);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input[type="text"]:focus, input[type="email"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+  }
+  input::placeholder { color: var(--text-faint); }
+ 
+  .btn-primary {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 13px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.15s;
+    margin-top: 8px;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-primary:disabled {
+    background: var(--border-strong);
+    cursor: not-allowed;
+  }
+  .btn-inline {
+    width: auto;
+    padding: 11px 22px;
+    margin-top: 0;
+  }
+ 
+  .error-msg {
+    color: var(--error);
+    font-size: 13px;
+    margin-top: 8px;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+ 
+  /* ============ ASSESSMENT TOP STRIP ============ */
+  .top-strip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+  .section-label {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .timer {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .timer.warning { color: var(--error); }
+  .timer svg { width: 14px; height: 14px; }
+ 
+  /* ============ PROGRESS CARD ============ */
+  .progress-card { padding: 18px 20px; }
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .progress-count {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .progress-track {
+    height: 4px;
+    background: var(--surface);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+ 
+  .section-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+  .pill.active {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: var(--accent-hover);
+    font-weight: 600;
+  }
+ 
+  /* ============ QUESTION ============ */
+  .section-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 6px;
+  }
+  .q-counter {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0 0 16px;
+  }
+  .question-text {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 22px;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .question-text pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    overflow-x: auto;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+  .question-text code {
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.92em;
+  }
+  .question-text ul {
+    margin: 10px 0;
+    padding-left: 22px;
+    font-size: 15px;
+  }
+  .question-text li { margin-bottom: 4px; }
+  .question-text em {
+    background: var(--surface);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-style: italic;
+    color: var(--text);
+  }
+ 
+  .answers { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .answer {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: border-color 0.15s, background-color 0.15s;
+    -webkit-user-select: none;
+    user-select: none;
+    background: var(--card);
+  }
+  .answer:hover { border-color: var(--text-faint); }
+  .answer.selected {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .answer-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+  .answer.selected .answer-letter {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .answer-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text);
+    flex: 1;
+  }
+ 
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    align-items: center;
+  }
+ 
+  /* ============ TAB SWITCH WARNING ============ */
+  .tab-warning {
+    background: #FEF3C7;
+    border: 1px solid #FCD34D;
+    color: #92400E;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    display: none;
+  }
+  .tab-warning.show { display: block; }
+ 
+  /* ============ COMPLETION ============ */
+  .completion {
+    text-align: center;
+    padding: 24px 8px;
+  }
+  .completion-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px auto 22px;
+  }
+  .completion-icon svg { width: 30px; height: 30px; }
+  .completion h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 8px;
+  }
+  .completion p {
+    color: var(--text-muted);
+    font-size: 15px;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+ 
+  @media (max-width: 600px) {
+    .container { padding: 24px 16px 56px; }
+    .app-title { font-size: 26px; }
+    .card { padding: 22px; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .question-text { font-size: 16px; }
+    .answer-text { font-size: 14px; }
+    .top-strip { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+</style>
+</head>
+<body oncontextmenu="return false;">
+ 
+<div class="container">
+ 
+  <!-- ====== HEADER ====== -->
+  <header class="app-header">
+    <div class="app-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 0v10l6 3"/></svg>
+    </div>
+    <h1 class="app-title">Winback Cognitive Assessment</h1>
+    <p class="app-role">Strategist</p>
+  </header>
+ 
+  <!-- ====== LANDING ====== -->
+  <section id="landing" class="screen active">
+    <div class="card">
+      <p class="description">This assessment measures your reasoning across logic, language, numeracy, and attention to detail. Read each question carefully and choose the best answer.</p>
+ 
+      <div class="stats-grid">
+        <div class="stat-box">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+          <span class="stat-label">Total Questions</span>
+          <span class="stat-value">10</span>
+        </div>
+        <div class="stat-box">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="stat-label">Time Limit</span>
+          <span class="stat-value">15 minutes</span>
+        </div>
+        <div class="stat-box">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 12l3 3 7-7"/></svg>
+          <span class="stat-label">Format</span>
+          <span class="stat-value">Multiple choice (4 options)</span>
+        </div>
+        <div class="stat-box">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          <span class="stat-label">Sections</span>
+          <span class="stat-value">4 — Logical, Verbal, Numerical, Attention</span>
+        </div>
+      </div>
+ 
+      <ul class="info-list">
+        <li>One point per correct answer. No penalty for skipping.</li>
+        <li>Once you click Next, your answer is locked. There is no back button.</li>
+        <li>Work as quickly and accurately as you can.</li>
+      </ul>
+    </div>
+ 
+    <div class="card">
+      <h2 class="card-section-title">Get Started</h2>
+      <p class="card-section-sub">Enter your details below to begin the assessment.</p>
+ 
+      <div class="field">
+        <label for="candidateName">Full Name</label>
+        <input type="text" id="candidateName" placeholder="Your full name" autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="candidateEmail">Work Email</label>
+        <input type="email" id="candidateEmail" placeholder="your.email@company.com" autocomplete="email" />
+      </div>
+      <div class="error-msg" id="landingError">Please enter your full name and a valid email address.</div>
+ 
+      <button class="btn-primary" id="startBtn">Begin Assessment</button>
+    </div>
+  </section>
+ 
+  <!-- ====== ASSESSMENT ====== -->
+  <section id="assessment" class="screen">
+    <div class="top-strip">
+      <span class="section-label" id="sectionLabel">Logical Reasoning · Question 1 of 10</span>
+      <span class="timer" id="timer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span id="timerText">15:00</span>
+      </span>
+    </div>
+ 
+    <div class="tab-warning" id="tabWarning">⚠️ Tab switch detected. Please stay on this page during the assessment.</div>
+ 
+    <div class="card progress-card">
+      <div class="progress-row">
+        <span>Progress</span>
+        <span class="progress-count"><span id="answeredCount">0</span> / 10 answered</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="section-pills" id="sectionPills">
+        <span class="pill" data-cat="logical_reasoning">Logical (3)</span>
+        <span class="pill" data-cat="verbal_reasoning">Verbal (3)</span>
+        <span class="pill" data-cat="numerical_reasoning">Numerical (2)</span>
+        <span class="pill" data-cat="attention_to_detail">Attention (2)</span>
+      </div>
+    </div>
+ 
+    <div class="card">
+      <p class="section-tag" id="sectionTag">LOGICAL REASONING</p>
+      <p class="q-counter" id="qCounter">Question 1 of 10</p>
+      <div class="question-text" id="questionText"></div>
+      <div class="answers" id="answers"></div>
+      <div class="actions">
+        <button class="btn-primary btn-inline" id="nextBtn" disabled>Next →</button>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ====== COMPLETION ====== -->
+  <section id="submitted" class="screen">
+    <div class="card completion">
+      <div class="completion-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2>Assessment Complete</h2>
+      <p>Thank you for completing the assessment. Your results have been recorded — the Winback team will be in touch regarding next steps.</p>
+    </div>
+  </section>
+ 
+</div>
+ 
+<script>
+/* =========================================================================
+ *  CONFIG — Formspree endpoint for this role
+ *  ========================================================================= */
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xnjrepar";
+const ROLE_TAG = "Strategist";
+ 
+/* =========================================================================
+ *  QUESTIONS — same content as before (strategist, 10 Qs)
+ *  Categories: logical_reasoning x3, verbal_reasoning x3,
+ *              numerical_reasoning x2, attention_to_detail x2
+ *  ========================================================================= */
+const QUESTIONS = [
+  {
+    n: 1,
+    category: "logical_reasoning",
+    html: `A DTC brand has the following data for their Welcome Series:
+      <ul>
+        <li>Email 1 (immediate): 58% open rate, 12% click rate</li>
+        <li>Email 2 (Day 2): 31% open rate, 6% click rate</li>
+        <li>Email 3 (Day 5): 22% open rate, 4% click rate</li>
+      </ul>
+      The team is debating whether to add a 4th email on Day 10 or remove Email 3 entirely. What is the most strategically sound recommendation?`,
+    choices: [
+      "Remove Email 3 — its performance is too low to justify the send.",
+      "Add a 4th email on Day 10, since the series shows consistent engagement.",
+      "Keep Email 3 and test a new subject line before making any structural changes.",
+      "Shorten the series to 1 email only, since Email 1 outperforms the others significantly."
+    ],
+    correct: 2
+  },
+  {
+    n: 2,
+    category: "numerical_reasoning",
+    html: `A client has 45,000 subscribers on their winback segment (lapsed 90–180 days). Their average order value is $85. Industry benchmark conversion rate for winback campaigns is 2%.
+      <br/><br/>If they run a winback campaign at benchmark, what is the estimated revenue opportunity?`,
+    choices: [
+      "$38,250",
+      "$76,500",
+      "$3,825",
+      "$765,000"
+    ],
+    correct: 1
+  },
+  {
+    n: 3,
+    category: "verbal_reasoning",
+    html: `A client sends this feedback after reviewing a draft strategy deck:
+      <br/><br/><em>"This is good but it feels more like a summary of what we already know. We want to understand what we should do differently and why it will work."</em>
+      <br/><br/>Which response best reflects strategic thinking?`,
+    choices: [
+      "Revise the deck to add a new section with specific, prioritized recommendations tied to projected revenue impact.",
+      "Add a slide that lists the client's current flows and highlights which ones are performing above benchmark.",
+      "Schedule a follow-up call to gather more information before making any changes to the deck.",
+      "Add a competitor analysis section to give the client more context around industry trends."
+    ],
+    correct: 0
+  },
+  {
+    n: 4,
+    category: "attention_to_detail",
+    html: `Review this strategy summary for a post-purchase flow:
+      <br/><br/><em>"The goal of this flow is to increase repeat purchase rate by 15% over 90 days. We will send 4 emails: a thank-you on Day 0, a product education email on Day 3, a cross-sell offer on Day 7, and a review request on Day 14. This will be triggered for all customers who place their first order. The flow will suppress anyone who makes a second purchase and re-enter customers who have purchased twice."</em>
+      <br/><br/>What is the logical error in this summary?`,
+    choices: [
+      "A 15% increase in 90 days is an unrealistic goal.",
+      "Customers who have purchased twice should not re-enter a first-purchase flow.",
+      "The review request should come before the cross-sell offer.",
+      "Product education emails are ineffective in post-purchase flows."
+    ],
+    correct: 1
+  },
+  {
+    n: 5,
+    category: "logical_reasoning",
+    html: `A brand's cart abandonment flow has a 3.8% conversion rate. The industry benchmark for their vertical is 5.2%. The flow currently has 2 emails: one at 1 hour and one at 24 hours.
+      <br/><br/>A strategist proposes adding a 3rd email (SMS) at 48 hours with a 10% discount. A second strategist argues the issue is the existing copy, not the send cadence.
+      <br/><br/>Which approach is most strategically defensible before making any changes?`,
+    choices: [
+      "Add the SMS immediately — SMS consistently outperforms email in cart recovery.",
+      "A/B test the existing Email 2 copy before adding a new touchpoint, to isolate the variable.",
+      "Remove Email 1 and replace it with SMS for maximum immediacy.",
+      "Add the 3rd touchpoint and test everything simultaneously to save time."
+    ],
+    correct: 1
+  },
+  {
+    n: 6,
+    category: "verbal_reasoning",
+    html: `A new client asks: <em>"We already send a lot of emails — how do we know we're not over-mailing our list?"</em>
+      <br/><br/>Which response best demonstrates strategic expertise?`,
+    choices: [
+      "\"We'll look at unsubscribe rate and spam complaints — if those are rising, you're over-mailing.\"",
+      "\"We'll analyze send frequency alongside open rate trends, unsubscribe rate, and revenue per recipient to identify the point where more sends yield diminishing returns — then calibrate from there.\"",
+      "\"Most brands send 3–4 emails per week. We'll benchmark your frequency against that and adjust accordingly.\"",
+      "\"We'll survey your subscribers to find out how often they want to hear from you.\""
+    ],
+    correct: 1
+  },
+  {
+    n: 7,
+    category: "numerical_reasoning",
+    html: `A client's welcome flow has these results over 30 days:
+      <ul>
+        <li>4,200 new subscribers entered the flow</li>
+        <li>336 placed their first order within 7 days of signup</li>
+        <li>Average order value: $72</li>
+      </ul>
+      What is the welcome flow's revenue per recipient (RPR)?`,
+    choices: [
+      "$5.76",
+      "$24,192",
+      "$8.00",
+      "$72.00"
+    ],
+    correct: 0
+  },
+  {
+    n: 8,
+    category: "attention_to_detail",
+    html: `A strategist presents this recommendation in a client report:
+      <br/><br/><em>"We recommend prioritizing the Browse Abandonment flow first because it has the highest revenue potential. Based on our analysis, 18% of site visitors abandon after viewing a product, and at a 4% conversion rate with an $80 AOV, the estimated monthly opportunity is $512,000."</em>
+      <br/><br/>The client's site gets 160,000 monthly visitors. Is the math correct?`,
+    choices: [
+      "Yes — the math is correct.",
+      "No — the number of abandoners was calculated incorrectly.",
+      "No — the estimated opportunity figure is too high.",
+      "No — the estimated opportunity figure is too low."
+    ],
+    correct: 2
+  },
+  {
+    n: 9,
+    category: "verbal_reasoning",
+    html: `A strategist needs to explain to a non-technical client why their Klaviyo flows are underperforming. Which explanation is most effective?`,
+    choices: [
+      "\"Your flows have suboptimal conditional splits and your suppression logic is creating gaps in your trigger architecture.\"",
+      "\"The automated emails that go out after customer actions — like buying or abandoning a cart — aren't converting as well as they should. Here's what we think is causing it and what we'll change.\"",
+      "\"Your email deliverability metrics indicate inbox placement issues that may be suppressing engagement rates across your flow ecosystem.\"",
+      "\"We've audited your flows and found several areas for improvement that we'd like to discuss on our next call.\""
+    ],
+    correct: 1
+  },
+  {
+    n: 10,
+    category: "logical_reasoning",
+    html: `A strategist is auditing a brand's email program and finds the following:
+      <ul>
+        <li>Welcome flow: 54% open rate, 2.1% conversion rate ✅</li>
+        <li>Cart abandonment flow: 48% open rate, 1.2% conversion rate ⚠️</li>
+        <li>Browse abandonment flow: Not built yet</li>
+        <li>Post-purchase flow: 41% open rate, exists but has no cross-sell emails</li>
+        <li>Winback flow: 19% open rate, 0.3% conversion rate ⚠️</li>
+      </ul>
+      Given limited time to deliver impact in the next 30 days, which prioritization is most defensible?`,
+    choices: [
+      "Build the Browse Abandonment flow first — it's missing entirely and likely has the highest upside.",
+      "Fix the Cart Abandonment flow first — it has traffic, decent open rates, but low conversion, suggesting a copy or offer problem with a clear fix.",
+      "Fix the Winback flow first — low conversion is a critical gap.",
+      "Add cross-sell emails to the Post-Purchase flow — existing buyers are the easiest to convert again."
+    ],
+    correct: 1
+  }
+];
+ 
+const CATEGORY_LABELS = {
+  logical_reasoning: "Logical Reasoning",
+  verbal_reasoning: "Verbal Reasoning",
+  numerical_reasoning: "Numerical Reasoning",
+  attention_to_detail: "Attention to Detail"
+};
+ 
+/* =========================================================================
+ *  STATE
+ *  ========================================================================= */
+const state = {
+  candidate: { name: "", email: "" },
+  startedAt: null,
+  currentIdx: 0,
+  selected: null,
+  answers: [],
+  timerInterval: null,
+  remainingSec: 15 * 60,
+  submitted: false,
+  tabSwitches: 0
+};
+ 
+/* =========================================================================
+ *  HELPERS
+ *  ========================================================================= */
+const $ = (id) => document.getElementById(id);
+const show = (id) => {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  $(id).classList.add('active');
+};
+const letterFor = (i) => ["A", "B", "C", "D"][i];
+ 
+function fmtTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+function validEmail(s) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim());
+}
+ 
+/* =========================================================================
+ *  START
+ *  ========================================================================= */
+$('startBtn').addEventListener('click', () => {
+  const name = $('candidateName').value.trim();
+  const email = $('candidateEmail').value.trim();
+  if (!name || !validEmail(email)) {
+    $('landingError').classList.add('show');
+    return;
+  }
+  $('landingError').classList.remove('show');
+  state.candidate.name = name;
+  state.candidate.email = email;
+  state.startedAt = Date.now();
+  startTimer();
+  show('assessment');
+  renderQuestion();
+});
+ 
+/* =========================================================================
+ *  TIMER
+ *  ========================================================================= */
+function startTimer() {
+  $('timerText').textContent = fmtTime(state.remainingSec);
+  state.timerInterval = setInterval(() => {
+    state.remainingSec -= 1;
+    $('timerText').textContent = fmtTime(state.remainingSec);
+    if (state.remainingSec <= 60) $('timer').classList.add('warning');
+    if (state.remainingSec <= 0) {
+      clearInterval(state.timerInterval);
+      finishAssessment(true);
+    }
+  }, 1000);
+}
+ 
+/* =========================================================================
+ *  RENDER QUESTION
+ *  ========================================================================= */
+function renderQuestion() {
+  const q = QUESTIONS[state.currentIdx];
+  const catLabel = CATEGORY_LABELS[q.category];
+ 
+  $('sectionLabel').textContent = `${catLabel} · Question ${state.currentIdx + 1} of ${QUESTIONS.length}`;
+  $('sectionTag').textContent = catLabel.toUpperCase();
+  $('qCounter').textContent = `Question ${state.currentIdx + 1} of ${QUESTIONS.length}`;
+  $('questionText').innerHTML = q.html;
+  $('answeredCount').textContent = state.answers.length;
+  $('progressFill').style.width = ((state.currentIdx) / QUESTIONS.length * 100) + '%';
+ 
+  // Update active pill
+  document.querySelectorAll('.pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.cat === q.category);
+  });
+ 
+  state.selected = null;
+  const ansWrap = $('answers');
+  ansWrap.innerHTML = '';
+  q.choices.forEach((choice, i) => {
+    const div = document.createElement('div');
+    div.className = 'answer';
+    div.dataset.idx = i;
+    div.innerHTML = `<span class="answer-letter">${letterFor(i)}</span><span class="answer-text">${choice}</span>`;
+    div.addEventListener('click', () => selectAnswer(i));
+    ansWrap.appendChild(div);
+  });
+ 
+  $('nextBtn').disabled = true;
+  $('nextBtn').textContent = state.currentIdx === QUESTIONS.length - 1 ? 'Submit' : 'Next →';
+}
+ 
+function selectAnswer(i) {
+  state.selected = i;
+  document.querySelectorAll('.answer').forEach(el => el.classList.remove('selected'));
+  document.querySelector(`.answer[data-idx="${i}"]`).classList.add('selected');
+  $('nextBtn').disabled = false;
+}
+ 
+$('nextBtn').addEventListener('click', () => {
+  if (state.selected === null) return;
+  const q = QUESTIONS[state.currentIdx];
+  state.answers.push({
+    n: q.n,
+    category: q.category,
+    selected_index: state.selected,
+    selected_letter: letterFor(state.selected),
+    correct_index: q.correct,
+    correct_letter: letterFor(q.correct),
+    is_correct: state.selected === q.correct
+  });
+  state.currentIdx += 1;
+  if (state.currentIdx >= QUESTIONS.length) {
+    finishAssessment(false);
+  } else {
+    renderQuestion();
+  }
+});
+ 
+/* =========================================================================
+ *  FINISH & SUBMIT
+ *  ========================================================================= */
+function scoreLabel(score) {
+  if (score >= 9) return "Exceptional";
+  if (score >= 7) return "Strong";
+  if (score >= 5) return "Developing";
+  return "Below threshold";
+}
+ 
+function finishAssessment(autoSubmitted) {
+  if (state.submitted) return;
+  state.submitted = true;
+  clearInterval(state.timerInterval);
+ 
+  while (state.answers.length < QUESTIONS.length) {
+    const idx = state.answers.length;
+    const q = QUESTIONS[idx];
+    state.answers.push({
+      n: q.n,
+      category: q.category,
+      selected_index: null,
+      selected_letter: null,
+      correct_index: q.correct,
+      correct_letter: letterFor(q.correct),
+      is_correct: false
+    });
+  }
+ 
+  const score = state.answers.filter(a => a.is_correct).length;
+  const breakdown = {
+    logical_reasoning: { correct: 0, total: 0 },
+    verbal_reasoning: { correct: 0, total: 0 },
+    numerical_reasoning: { correct: 0, total: 0 },
+    attention_to_detail: { correct: 0, total: 0 }
+  };
+  state.answers.forEach(a => {
+    breakdown[a.category].total += 1;
+    if (a.is_correct) breakdown[a.category].correct += 1;
+  });
+ 
+  const timeTakenSec = Math.round((Date.now() - state.startedAt) / 1000);
+ 
+  const payload = {
+    role: ROLE_TAG,
+    candidate_name: state.candidate.name,
+    candidate_email: state.candidate.email,
+    score: score,
+    total: QUESTIONS.length,
+    score_text: `${score} / ${QUESTIONS.length}`,
+    label: scoreLabel(score),
+    auto_submitted: autoSubmitted,
+    tab_switches: state.tabSwitches,
+    time_taken_seconds: timeTakenSec,
+    time_taken_formatted: fmtTime(timeTakenSec),
+    category_breakdown: {
+      logical_reasoning: `${breakdown.logical_reasoning.correct}/${breakdown.logical_reasoning.total}`,
+      verbal_reasoning: `${breakdown.verbal_reasoning.correct}/${breakdown.verbal_reasoning.total}`,
+      numerical_reasoning: `${breakdown.numerical_reasoning.correct}/${breakdown.numerical_reasoning.total}`,
+      attention_to_detail: `${breakdown.attention_to_detail.correct}/${breakdown.attention_to_detail.total}`
+    },
+    answers: state.answers,
+    submitted_at: new Date().toISOString()
+  };
+ 
+  show('submitted');
+ 
+  if (FORMSPREE_ENDPOINT && !FORMSPREE_ENDPOINT.includes("PASTE_")) {
+    fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(err => console.error('Formspree submission failed:', err));
+  } else {
+    console.warn('Formspree endpoint not configured. Payload:', payload);
+  }
+}
+ 
+/* =========================================================================
+ *  Anti-cheat niceties
+ *  ========================================================================= */
+document.addEventListener('keydown', (e) => {
+  if (!$('assessment').classList.contains('active')) return;
+  const k = e.key.toLowerCase();
+  if ((e.ctrlKey || e.metaKey) && ['c', 'u', 's', 'p', 'a'].includes(k)) {
+    e.preventDefault();
+  }
+});
+ 
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && $('assessment').classList.contains('active') && !state.submitted) {
+    state.tabSwitches += 1;
+    const w = $('tabWarning');
+    w.classList.add('show');
+    setTimeout(() => w.classList.remove('show'), 5000);
+  }
+});
+ 
+window.addEventListener('beforeunload', (e) => {
+  if (state.startedAt && !state.submitted) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
+</script>
+</body>
+</html>
